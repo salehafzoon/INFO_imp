@@ -47,7 +47,7 @@ class CustomChatModel(object):
         
         # self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.device = torch.device("cuda:" + str(self.args.gpu_ids[0]) if torch.cuda.is_available() else "cpu")
-        print(self.device)
+        print("\n\nDevice:",self.device,"\n\n")
         
         init_logger()
         logger.info("Training/evaluation parameters {}".format(self.args))
@@ -83,20 +83,46 @@ class CustomChatModel(object):
             """
         )
     
-    def build_model(self):
+    # def build_model(self):
         
+    #     self.tokenizer = TOKENIZER_CLASSES[args.model].from_pretrained(args.backbone)
+    #     # with self.tokenizer.as_target_tokenizer():
+    #     #     self.tokenizer = self.tokenizer
+        
+    #     ret_orig_num_tokens = len(self.tokenizer.question_encoder)
+    #     ret_num_added_tokens = 0
+    #     gen_orig_num_tokens = len(self.tokenizer.generator)
+    #     gen_num_added_tokens = 0
+        
+    #     add_tokens = gen_orig_num_tokens + gen_num_added_tokens if "rag" not in self.args.model else {
+    #         "retriever": ret_orig_num_tokens + ret_num_added_tokens,
+    #         "generator": gen_orig_num_tokens + gen_num_added_tokens}
+    #     self.model = MODEL_CLASSES[args.model](self.args, self.tokenizer, add_tokens, self.device)
+    #     self.keys_for_device = GPU_KEYS[args.model]
+    #     self.model.to(self.device)
+        
+    #     # Use Multi-GPUs
+    #     if -1 not in self.args.gpu_ids and len(self.args.gpu_ids) > 1:
+    #         self.model = nn.DataParallel(self.model, self.args.gpu_ids)
+        
+    #     print(
+    #         """
+    #         # -------------------------------------------------------------------------
+    #         #   BUILD MODEL DONE
+    #         # -------------------------------------------------------------------------
+    #         """
+    #     )
+    def build_model(self):
         self.tokenizer = TOKENIZER_CLASSES[args.model].from_pretrained(args.backbone)
-        # with self.tokenizer.as_target_tokenizer():
-        #     self.tokenizer = self.tokenizer
         
         ret_orig_num_tokens = len(self.tokenizer.question_encoder)
-        ret_num_added_tokens = 0
         gen_orig_num_tokens = len(self.tokenizer.generator)
-        gen_num_added_tokens = 0
         
-        add_tokens = gen_orig_num_tokens + gen_num_added_tokens if "rag" not in self.args.model else {
-            "retriever": ret_orig_num_tokens + ret_num_added_tokens,
-            "generator": gen_orig_num_tokens + gen_num_added_tokens}
+        add_tokens = gen_orig_num_tokens if "rag" not in self.args.model else {
+            "retriever": ret_orig_num_tokens,
+            "generator": gen_orig_num_tokens
+        }
+        
         self.model = MODEL_CLASSES[args.model](self.args, self.tokenizer, add_tokens, self.device)
         self.keys_for_device = GPU_KEYS[args.model]
         self.model.to(self.device)

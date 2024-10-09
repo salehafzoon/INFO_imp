@@ -193,9 +193,11 @@ class RagProcessor(CustomChatModelProcessor):
         knowledge_can_enc = [self.tokenizer(sentence)["input_ids"][1:-1] for sentence in example["raw_knowledge_cand"]]
         persona_can_enc = [self.tokenizer(sentence)["input_ids"][1:-1] for sentence in example["raw_persona_cand"]]
         
-        with self.tokenizer.as_target_tokenizer():
-            reply = self.tokenizer(reply)["input_ids"][1:-1]
-            
+        # with self.tokenizer.as_target_tokenizer():
+        #     reply = self.tokenizer(reply)["input_ids"][1:-1]
+
+        reply = self.tokenizer(reply)["input_ids"][1:-1]
+        
         reply_tti = [machine_st] * (len(reply) + 1)  # machine
         knowledge_hint =[self.tokenizer(example["landmark_link"][example["landmark_link"].index("/wiki/")+6:])["input_ids"][1:-1]] if self.args.knowledge_hint else []
         

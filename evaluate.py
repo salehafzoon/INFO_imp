@@ -86,8 +86,15 @@ class Evaluation(object):
             self.args.backbone,
         )
         
-        self.p_accuracy = Accuracy(num_classes=2, multiclass=True).to(self.device)
-        self.k_accuracy = Accuracy(num_classes=10).to(self.device)
+        # self.p_accuracy = Accuracy(num_classes=2, multiclass=True).to(self.device)
+        # self.k_accuracy = Accuracy(num_classes=10).to(self.device)
+
+        # For binary classification
+        self.p_accuracy = Accuracy(task="binary").to(self.device)
+
+        # For multiclass classification (10 classes)
+        self.k_accuracy = Accuracy(task="multiclass", num_classes=10).to(self.device)
+
         self.chrf_metric = load_metric("chrf")
         self.rouge = load_metric('rouge')
         # self.rouge = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
