@@ -4,3 +4,4 @@ __pycache__
 *.faiss
 *.arrow
 data/knowledge_doc.csv
+/pkchat/cached/
