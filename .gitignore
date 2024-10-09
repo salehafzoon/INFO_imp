@@ -1,0 +1,6 @@
+.venv
+__pycache__
+*.json
+*.faiss
+*.arrow
+data/knowledge_doc.csv

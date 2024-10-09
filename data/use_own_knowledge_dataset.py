@@ -23,7 +23,9 @@ from transformers import (
 
 logger = logging.getLogger(__name__)
 torch.set_grad_enabled(False)
-device = "cuda:1" if torch.cuda.is_available() else "cpu"
+# device = "cuda:1" if torch.cuda.is_available() else "cpu"
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
+
 
 
 def split_text(text: str, n=100, character=" ") -> List[str]:

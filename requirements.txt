@@ -1,17 +1,37 @@
 attrdict
 setproctitle
-transformers==4.17.0
+transformers
 tensorboardX
-tensorflow==2.2.0
+tensorflow
 nltk
 torchmetrics
 sentence_transformers
 jsonlines
 spacy
 wget
-rouge-score==0.0.4
-datasets==2.0.0
+rouge-score
 faiss-cpu
+
+# pip install datasets=2.0.0
 # pip install sacrebleu
 # pip install rouge_score==0.0.4
-# pip install torch==1.8.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+
+# pip uninstall pandas numpy
+# pip install numpy==1.23.5 pandas==1.5.3
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+####### 
+# then replace all the:
+#    from collections import Mapping
+# with:
+#    from collections.abc import Mapping
+# in the codes in .venv/lib/python3.10/site-packages/attrdict/
+
+# in use_own_knowledge_dataset.py:
+
+# change this:
+#      device = "cuda:1" if torch.cuda.is_available() else "cpu"
+
+# to this:
+
+#     device = "cuda:0" if torch.cuda.is_available() else "cpu"

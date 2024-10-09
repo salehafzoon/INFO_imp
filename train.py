@@ -86,8 +86,8 @@ class CustomChatModel(object):
     def build_model(self):
         
         self.tokenizer = TOKENIZER_CLASSES[args.model].from_pretrained(args.backbone)
-        with self.tokenizer.as_target_tokenizer():
-            self.tokenizer = self.tokenizer
+        # with self.tokenizer.as_target_tokenizer():
+        #     self.tokenizer = self.tokenizer
         
         ret_orig_num_tokens = len(self.tokenizer.question_encoder)
         ret_num_added_tokens = 0
