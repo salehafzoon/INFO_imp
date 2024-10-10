@@ -5,3 +5,5 @@ __pycache__
 *.arrow
 data/knowledge_doc.csv
 data/checkpoints
+runs/pkchat
+data/FoCus/pkchat/
