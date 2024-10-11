@@ -1,9 +1,12 @@
 .venv
 __pycache__
-*.json
 *.faiss
 *.arrow
 data/knowledge_doc.csv
-data/checkpoints
 runs/pkchat
 data/FoCus/pkchat/
+data/checkpoints/pkchat/checkpoint_1.pth
+data/FoCus/train_focus.json
+data/FoCus/valid_focus.json
+
+data/knowledge_index/knowledge_dataset

@@ -266,8 +266,14 @@ def eval_file(path, gpu_ids):
         data = json.load(f)["qualitative_results"]
     # move the metric to device you want computations to take place
     device = "cuda:"+str(gpu_ids)
-    p_accuracy = Accuracy(num_classes=2, multiclass=True).to(device)
-    k_accuracy = Accuracy(num_classes=10).to(device)
+    
+    # p_accuracy = Accuracy(num_classes=2, multiclass=True).to(device)
+    # k_accuracy = Accuracy(num_classes=10).to(device)
+
+    p_accuracy = Accuracy(task="binary").to(device)
+    k_accuracy = Accuracy(task="multiclass", num_classes=10).to(device)
+
+
     bleu_metric = load_metric("sacrebleu")
     bleu1_metric = load_metric("bleu")
     
@@ -355,5 +361,5 @@ def eval_file(path, gpu_ids):
 
 
 if __name__ == "__main__":
-    qual_path = "valid_qualitative_results_5.json"
-    eval_file(qual_path, 2)
+    qual_path = "data/checkpoints/pkchat/valid_qualitative_results_1.json"
+    eval_file(qual_path, 0)

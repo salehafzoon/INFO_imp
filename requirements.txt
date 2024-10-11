@@ -15,7 +15,7 @@ faiss-cpu
 # pip install datasets=2.0.0
 # pip install sacrebleu
 # pip install rouge_score==0.0.4
-
+# pip install bert_score
 # pip uninstall pandas numpy
 # pip install numpy==1.23.5 pandas==1.5.3
 # pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
